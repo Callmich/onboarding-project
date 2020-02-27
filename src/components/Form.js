@@ -16,6 +16,9 @@ const FormOnBoard = ({ values, touched, errors, status })=>{
                         name="name"
                         placeholder="name"
                     />
+                    {touched.name && errors.name && (
+                        <div>{errors.name}</div>
+                    )}
                 </label>
                 <br/>
                 <label htmlFor="email">Email</label>
@@ -25,6 +28,9 @@ const FormOnBoard = ({ values, touched, errors, status })=>{
                         name="email"
                         placeholder="name"        
                     />
+                    {touched.email && errors.email && (
+                        <div>{errors.email}</div>
+                    )}
                 <br/>
                 <label htmlFor="password">Password</label>
                     <Field
@@ -33,6 +39,9 @@ const FormOnBoard = ({ values, touched, errors, status })=>{
                         name="password"
                         placeholder="password"        
                     />
+                    {touched.password && errors.password && (
+                        <div>{errors.password}</div>
+                    )}
                 <br/>
                 <label htmlFor="tos">
                     Terms of Service
@@ -40,8 +49,10 @@ const FormOnBoard = ({ values, touched, errors, status })=>{
                         id="tos"
                         type="checkbox"
                         name="tos"
-                        
                     />
+                    {touched.tos && errors.tos && (
+                        <div>{errors.tos}</div>
+                    )}
                 </label>
                 <br/>
                 <button type="submit">Submit</button>
@@ -62,7 +73,8 @@ const FormikForm = withFormik({
     validationSchema: Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().required(),
-        password: Yup.string().required()
+        password: Yup.string().required(),
+        tos: Yup.string().required()
     }),
 })(FormOnBoard);
 
