@@ -3,7 +3,7 @@ import { withFormik, Form, Field} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const FormOnBoard = ({ values })=>{
+const FormOnBoard = ({ values, touched, errors, status })=>{
 
     return (
         <div>
@@ -17,6 +17,7 @@ const FormOnBoard = ({ values })=>{
                         placeholder="name"
                     />
                 </label>
+                <br/>
                 <label htmlFor="email">Email</label>
                     <Field
                         id="email"
@@ -24,6 +25,7 @@ const FormOnBoard = ({ values })=>{
                         name="email"
                         placeholder="name"        
                     />
+                <br/>
                 <label htmlFor="password">Password</label>
                     <Field
                         id="password"
@@ -31,6 +33,7 @@ const FormOnBoard = ({ values })=>{
                         name="password"
                         placeholder="password"        
                     />
+                <br/>
                 <label htmlFor="tos">
                     Terms of Service
                     <Field 
@@ -40,6 +43,8 @@ const FormOnBoard = ({ values })=>{
                         
                     />
                 </label>
+                <br/>
+                <button type="submit">Submit</button>
             </Form>
         </div>
     )
@@ -53,7 +58,12 @@ const FormikForm = withFormik({
             password: password || "",
             tos: tos || false
         }
-    }
+    },
+    validationSchema: Yup.object().shape({
+        name: Yup.string().required(),
+        email: Yup.string().required(),
+        password: Yup.string().required()
+    }),
 })(FormOnBoard);
 
 export default FormikForm
